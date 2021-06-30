@@ -1,81 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { removeTask } from "../../actions/taskActions";
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 function Task(props) {
- 
+  const [passedContact, setPassedContact] = useState(props.allcontacts);
+  const addedcontact = useSelector((state) => state.task);
+  const { newaddedcontact,ContactAddedSuccesssStatus } = addedcontact;
 
+  const deletedcontact = useSelector((state) => state.task);
+
+  const { deletedContactId, ContactDeletedSuccesssStatus } = deletedcontact;
+
+
+  useEffect(() => {
+    {
+      ContactAddedSuccesssStatus &&
+      setPassedContact([ newaddedcontact,...passedContact]);
+      console.log("new contact added");
+    }
+    {
+      ContactDeletedSuccesssStatus &&
+      // setPassedContact([ newaddedcontact,...passedContact]);
+      console.log("a contact deleted");
+      console.log(passedContact)
+     
+      const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
+      console.log(latestContact );
+      setPassedContact(latestContact);
+    }
+  }, [ContactAddedSuccesssStatus,ContactDeletedSuccesssStatus]);
   return (
+
     <>
-      {props.allcontacts.map(contact => (
-        <tr >
-          <th scope="row">
-            <div className="media align-items-center">
-              <div className="media-body ml-4">
-                <a href="" className="name h6 mb-0 text-sm">
-                  {contact.task.name}
-                </a>
-                <small className="d-block font-weight-bold">#{contact.task.email}/night</small>
-              </div>
-            </div>
-          </th>
-          <td>
-            <div className="dropdown">
-              <span className="text-center badge badge-secondary rounded-pill ml-4">
-                {contact.task.name}
-              </span>
-            </div>
-          </td>
-          <td>
-            <div className="dropdown">
-              <span className="text-center badge badge-secondary rounded-pill ml-4">
-                {`${contact .currently_booked}`}
-              </span>
-              <div className="dropdown-menu">
-
-              </div>
-            </div>
-          </td>
-          <td className="text-right">
-            <div className="ml-3">
-             
-    
-                <Link to={`/spaces/p/${contact .id}`}
-                
-                  className="action-item mr-2"
-                >
-                <i
-                  className="fa fa-eye">
-
-                  </i>
-                
-                </Link>
-             
-             
-              
-              <Link to={`/listings/${contact .id}/edit`}
-
-                className="action-item mr-2"
-
-              >
-                <i
-
-                  className="fa fa-edit"></i>
-              </Link>
-              <button
-              // onClick={() => props.deleteHandler(contact .id)}
-                className="action-item text-danger mr-2"
-              >
-                <i
-                  className="fa fa-trash"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      ))}
+    {passedContact.map(contact => (
+      <tr key={contact.id}>
+        <td scope="col">{contact.name}</td>
+        <td scope="col">{contact.phonenumber}</td>
+        <td scope="col">{contact.email}</td>
+       
+        <td scope="col">
+          <span
+            className="material-icons text-danger"
+            style={{ cursor: "pointer" }}
+            onClick={() => props.deleteHandler(contact.id)}
+          >
+            delete
+          </span>
+        </td>
+        <td scope="col">
+          <span
+            className="material-icons text-danger"
+            style={{ cursor: "pointer" }}
+            // onClick={() => handleRemove(task)}
+          >
+            edit
+          </span>
+        </td>
+      </tr>
+    ))}
     </>
+
+
   );
 };
 

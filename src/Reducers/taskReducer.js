@@ -9,13 +9,20 @@ const taskReducer = (state = { contacts: []}, action) => {
     case "ADD_CONTACT": {
       toast.success("New Contact Successfully Added");
       return {
-         contacts: action.payload,
-         AddingContactLoading: false }
+        //uploadedfile: action.payload
+         newaddedcontact: action.payload,
+         AddingContactLoading: false,
+         ContactAddedSuccesssStatus: true,
+         }
     }
     case "ADD_CONTACT_ERR": {
       toast.error("An error occurred");
       return {...state, AddingContactLoading: false }
     }
+
+    // case "ADD_CONTACT_RESET": {
+    //   return {}
+    // }
     case "FETCH_CONTACT_REQUEST": {
       return {FetchningContactLoading: true,  contacts: [] }
     }
@@ -30,22 +37,22 @@ const taskReducer = (state = { contacts: []}, action) => {
       toast.error(action.payload);
       return {FetchningContactLoading: false, error: action.payload }
     }
-    case "REMOVE_CONTACT": {
-      toast.warn("Contact was deleted...");
+    case "DELETE_CONTACT": {
+      toast.warn("Contact was deleted....");
+      return {    
+         deletedContactId: action.payload,
+         ContactDeletedSuccesssStatus: true,
+         }
+    }
+    case "DELETE_CONTACT_ERR": {
+      toast.error(action.payload);
       return state;
     }
-    case "REMOVE_CONTACT_ERR": {
-      toast.error("An error occurred. Unable to delete contact");
-      return state;
+
+    case "DELETE_CONTACT_RESET": {
+      return {};
     }
-    case "TOGGLE_CHECKED": {
-      toast.info("A task status changed...");
-      return state;
-    }
-    case "TOGGLE_CHECKED_ERR": {
-      toast.error("A task status change error occured...");
-      return state;
-    }
+  
     default:
       return state;
   }

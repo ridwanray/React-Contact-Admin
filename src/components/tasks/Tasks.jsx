@@ -5,12 +5,19 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchContact } from "../../actions/taskActions";
+import { fetchContact,deleteContact } from "../../actions/taskActions";
 
 function Tasks() {
   const dispatch = useDispatch();
   const contactInfo = useSelector((state) => state.task);
   const { FetchningContactLoading,contacts,error } = contactInfo;
+
+  const deleteAContact = (id) => {
+    if (window.confirm("You are about to delete this contact. Are you sure?")) {
+      console.log("to be deleted", id);
+      dispatch(deleteContact(id));
+    }
+  };
 
   useEffect(() => {
     // fetchContact();
@@ -30,6 +37,7 @@ function Tasks() {
             <th scope="col">Phone Number</th>
             <th scope="col">Email Address</th>
             <th scope="col">Delete</th>
+            <th scope="col">Edit</th>
           </tr>
         </thead>
         <tbody>
@@ -44,12 +52,13 @@ function Tasks() {
                 </div>
             ) : (
                 
-                          <tbody>
+                        
                             <Task
-                              // deleteHandler={deleteASpace}
+                              
+                              deleteHandler={deleteAContact}
                               allcontacts={contacts}
                             />
-                          </tbody>
+                         
               
               )}
  

@@ -4,23 +4,27 @@ export const addTask = (task) => {
     const firestore = getFirebase().firestore();
     dispatch({ type: "ADD_CONTACT_REQUEST" });
     console.log("something gets here", task);
-
-    // const todoRef = firebase.database().ref('Todo');
-    // todoRef.push(task)
     firestore
       .collection("contacts")
-      .add({
-        task,
-      })
-
-      .then(() => {
+      .add(
+        task
+      )
+      
+      .then((data) => {
+        console.log('no error')
+        console.log("CONTACT CREATEED created with ID: ", data.id);
+        document.getElementById("addTaskForm").reset();
         dispatch({
           type: "ADD_CONTACT",
-          payload: task, // task,
+          payload: task,
+        });
+        dispatch({
+          type: "ADD_CONTACT_RESET",
+         
         });
       })
       .catch((error) => {
-        console.log("hope  is here");
+        console.log('1 error')
         dispatch({
           type: "ADD_CONTACT_ERR",
           error,
@@ -29,21 +33,27 @@ export const addTask = (task) => {
   };
 };
 
-export const removeTask = (task) => {
+export const deleteContact = (id) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
     firestore
-      .collection("tasks")
-      .doc(task.id)
+      .collection("contacts")
+      .doc(id)
       .delete()
       .then(() => {
         dispatch({
-          type: "REMOVE_CONTACT",
+          type: "DELETE_CONTACT",
+          payload: id, // task,
+        });
+
+        dispatch({
+          type: "DELETE_CONTACT",
+         
         });
       })
       .catch((err) => {
         dispatch({
-          type: "REMOVE_CONTACT_ERR",
+          type: "DELETE_CONTACT_ERR",
           err,
         });
       });
@@ -99,8 +109,11 @@ export const fetchContact = () => {
       .then((querySnapshot) => {
        const ContactData = [];
         querySnapshot.forEach((element) => {
+          var id = element.id;
           var data = element.data();
-          ContactData.push(data);
+          // tutorials.push({ id: id, title: data.title, description: data.description});
+       //   ContactData.push(data);
+       ContactData.push({id:id,name:data.name,email:data.email,phonenumber:data.phonenumber});
         });
         console.log(ContactData);
         
