@@ -17,15 +17,15 @@ function Task(props) {
 
 
   useEffect(() => {
-    {
-      ContactAddedSuccessStatus &&
-      console.log("new contact added");
-      console.log("new doc",newaddedcontact);
-      setPassedContact([...passedContact,newaddedcontact]);
-      //      setAttachments([...userattachments, uploadedfile]);
-      console.log('all state:',allstate)
+    // {
+    //   ContactAddedSuccessStatus &&
+    //   console.log("new contact added");
+    //   console.log("new doc",newaddedcontact);
+    //   setPassedContact([...passedContact,newaddedcontact]);
+    //   //      setAttachments([...userattachments, uploadedfile]);
+    //   console.log('all state:',allstate)
       
-    }
+    // }
     // {
     //   ContactDeletedSuccesssStatus &&
     //   // setPassedContact([ newaddedcontact,...passedContact]);
