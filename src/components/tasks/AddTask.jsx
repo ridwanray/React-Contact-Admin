@@ -24,6 +24,8 @@ class AddTask extends Component {
 
   render() {
     const { AddingContactLoading } = this.props;
+    const {  DeletingContactLoading } = this.props;
+    
     return (
       <>
        <legend>
@@ -79,7 +81,17 @@ class AddTask extends Component {
                     'Add Contact'
                     ):( 'Adding...'  ) } 
           </button>
+
+        
         </form>
+        { DeletingContactLoading && 
+        <div className='text-center'>
+        <span className='text-center'>Deleting contact...Wait  😎 </span>
+        </div>
+
+        }
+        
+       
       </>
     );
   }
@@ -87,10 +99,11 @@ class AddTask extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-
+  const DeletingContactLoading = state.DeleteContact.loading;
   const AddingContactLoading = state.AddContact.AddingContactLoading;
   return {
     AddingContactLoading: AddingContactLoading,
+    DeletingContactLoading: DeletingContactLoading,
   };
 };
 

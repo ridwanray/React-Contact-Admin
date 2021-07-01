@@ -10,9 +10,15 @@ function Edit({history}) {
     DataDetailsById:DataDetailsById,
     successDataStatus: successDataStatus,
     FetchingContactByIDLoading: FetchingContactByIDLoading,
-    UpdatingContactByIDLoading:UpdatingContactByIDLoading,
+    
    
   } = singleContactDetails;
+  const singleContactUpdate= useSelector((state) => state.UpdateContact);
+  const {
+    UpdatingContactByIDLoading:UpdatingContactByIDLoading,
+
+   
+  } = singleContactUpdate;
   const uid = useSelector(state =>state.firebase.auth.uid)
   const { id } = useParams();
   const [name, setName] = useState("");
@@ -62,6 +68,12 @@ function Edit({history}) {
         >
           <legend>
             {" "}
+            {/* { FetchingContactByIDLoading && 
+        <div className='text-center'>
+        <span className='text-center'>Fetching data for the ID...</span>
+        </div>
+
+        } */}
             <h4  className='text-center '>Edit Contact</h4> 
                 
                 
@@ -102,7 +114,7 @@ function Edit({history}) {
           <button
            disabled={UpdatingContactByIDLoading&& "disable"}
            type="submit" className="btn btn-primary">
-          {!UpdatingContactByIDLoading?'Update Contact':'Updating'
+          {UpdatingContactByIDLoading?'Updating....':'Update Contact'
           }
           </button>
         </form>

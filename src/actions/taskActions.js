@@ -1,4 +1,3 @@
-// import firebase from '../config/firebaseConfig';
 export const addTask = (task) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
@@ -37,6 +36,10 @@ export const addTask = (task) => {
 export const deleteContact = (id) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
+    dispatch({
+      type: "DELETE_CONTACT_REQUEST",
+      payload: id, // task,
+    });
     firestore
       .collection("contacts")
       .doc(id)
@@ -103,7 +106,7 @@ export const fetchContact = () => {
 export const fetchContactByID = (id) => {
   return (dispatch, getState, { getFirebase }) => {
     const firestore = getFirebase().firestore();
-    // dispatch({ type: "FETCH_CONTACT_REQUEST" });
+    // dispatch({ type: "FETCH_CONTACT_BY_ID_REQUEST" });
     console.log("fetching contact id by..........");
     firestore
       .collection("contacts")
@@ -112,6 +115,7 @@ export const fetchContactByID = (id) => {
       .then((doc) => {
         if (doc.exists) {
           console.log("Document data:", doc.data());
+          //FETCH_CONTACT_BY_ID_ERR
           dispatch({
           type: "FETCH_CONTACT_BY_ID_SUCCESS",
           payload:doc.data()
