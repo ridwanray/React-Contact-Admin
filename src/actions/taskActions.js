@@ -43,13 +43,13 @@ export const deleteContact = (id) => {
       .delete()
       .then(() => {
         dispatch({
-          type: "DELETE_CONTACT",
+          type: "DELETE_CONTACT_SUCCESS",
           payload: id, // task,
         });
 
-        dispatch({
-          type: "DELETE_CONTACT",
-        });
+        // dispatch({
+        //   type: "DELETE_CONTACT",
+        // });
       })
       .catch((err) => {
         dispatch({

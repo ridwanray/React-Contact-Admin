@@ -15,28 +15,45 @@ function Task(props) {
 
   const { deletedContactId, ContactDeletedSuccessStatus } = deletedcontact;
 
-
   useEffect(() => {
-    // {
-    //   ContactAddedSuccessStatus &&
-    //   console.log("new contact added");
-    //   console.log("new doc",newaddedcontact);
-    //   setPassedContact([...passedContact,newaddedcontact]);
-    //   //      setAttachments([...userattachments, uploadedfile]);
-    //   console.log('all state:',allstate)
+    {
+      ContactAddedSuccessStatus &&
+      setPassedContact([newaddedcontact,...passedContact]);
+      console.log("heu yyyyyyyyyyyyyyyyyyyyyyyoooo");
+    }
+
+     {
+      ContactDeletedSuccessStatus &&
+      console.log("a contact deleted");
+      console.log(passedContact)   
+      const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
+      console.log(latestContact );
+      setPassedContact(latestContact);
+    }
+
+  }, [ContactAddedSuccessStatus,addedcontact,newaddedcontact,deletedContactId,deletedcontact, ContactDeletedSuccessStatus]);
+
+  // useEffect(() => {
+  //   // {
+  //   //   ContactAddedSuccessStatus &&
+  //   //   console.log("new contact added");
+  //   //   console.log("new doc",newaddedcontact);
+  //   //   setPassedContact([...passedContact,newaddedcontact]);
+  //   //   //      setAttachments([...userattachments, uploadedfile]);
+  //   //   console.log('all state:',allstate)
       
-    // }
-    // {
-    //   ContactDeletedSuccesssStatus &&
-    //   // setPassedContact([ newaddedcontact,...passedContact]);
-    //   console.log("a contact deleted");
-    //   console.log(passedContact)
+  //   // }
+  //   // {
+  //   //   ContactDeletedSuccesssStatus &&
+  //   //   // setPassedContact([ newaddedcontact,...passedContact]);
+  //   //   console.log("a contact deleted");
+  //   //   console.log(passedContact)
      
-    //   const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
-    //   console.log(latestContact );
-    //   setPassedContact(latestContact);
-    // }
-  }, []);
+  //   //   const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
+  //   //   console.log(latestContact );
+  //   //   setPassedContact(latestContact);
+  //   // }
+  // }, []);
   return (
  
     <>

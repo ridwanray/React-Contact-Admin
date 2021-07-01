@@ -91,7 +91,7 @@ import { toast } from "react-toastify";
 // DELETE CONTACT REDUCER
 // UPDATE CONTACT REDUCER
 
-export const addContactReducer = (state = { contacts: [] }, action) => {
+export const addContactReducer = (state = {}, action) => {
   switch (action.type) {
     case "ADD_CONTACT_REQUEST":
       
@@ -100,7 +100,7 @@ export const addContactReducer = (state = { contacts: [] }, action) => {
     case "ADD_CONTACT_SUCCESS":
       toast.success("New Contact Successfully Added");
       return {
-        newaddedcontact: {id:'sdofdofdf',name:'reud'},
+        newaddedcontact:action.payload, //.task, // {id:'sdofdofdf',name:'reud',email:'myem@',phonenumber:'dsd'},
         AddingContactLoading: false,
         ContactAddedSuccessStatus: true,
       };
