@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import { fetchContactByID,updateContactByID } from "../../actions/taskActions";
 function Edit({history}) {
   const dispatch = useDispatch();
-  const singleContactDetails = useSelector((state) => state.task);
+  const singleContactDetails = useSelector((state) => state.FetchIndividualContact);
   const {
     DataDetailsById:DataDetailsById,
     successDataStatus: successDataStatus,

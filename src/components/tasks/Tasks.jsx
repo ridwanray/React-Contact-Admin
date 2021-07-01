@@ -4,10 +4,10 @@ import React, {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContact,deleteContact } from "../../actions/taskActions";
 
-function Tasks() {
+function Tasks({history}) {
   const dispatch = useDispatch();
-  const contactInfo = useSelector((state) => state.task);
-  const { FetchningContactLoading,contacts,error } = contactInfo;
+  const contactInfo = useSelector((state) => state.FetchAllContact);
+  const { FetchningContactLoading,contacts,error,success } = contactInfo;
 
   const deleteAContact = (id) => {
     if (window.confirm("You are about to delete this contact. Are you sure?")) {
@@ -20,7 +20,7 @@ function Tasks() {
     // fetchContact();
     dispatch(fetchContact());
     console.log('coming from task effect')
-  }, [dispatch])
+  }, [dispatch,history])
   
   return (
     <>
@@ -38,7 +38,16 @@ function Tasks() {
           </tr>
         </thead>
         <tbody>
+          
+        {/* {FetchningContactLoading ? 'Loading data...':''}
 
+        {success && 
+        <Task
+                              
+        deleteHandler={deleteAContact}
+        allcontacts={contacts}
+      />
+        } */}
         {FetchningContactLoading ? (
                <div  className='mt-5 container d-flex justify-content-center text-center text-muted h4'>
                <span className='text-center'>Loading data ...</span>  

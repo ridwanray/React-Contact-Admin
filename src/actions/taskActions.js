@@ -12,15 +12,18 @@ export const addTask = (task) => {
         console.log("no error");
         console.log("CONTACT CREATEED created with ID: ", data.id);
         document.getElementById("addTaskForm").reset();
+        console.log('newly added data', task);
         dispatch({
-          type: "ADD_CONTACT",
+          type: "ADD_CONTACT_SUCCESS",
           payload: task,
         });
-        // dispatch({
-        //   type: "ADD_CONTACT_RESET",
 
-        // });
+        dispatch({
+          type:'ADD_CONTACT_RESET'
       })
+      
+      })
+     
       .catch((error) => {
         console.log("1 error");
         dispatch({
@@ -82,7 +85,7 @@ export const fetchContact = () => {
         console.log(ContactData);
 
         dispatch({
-          type: "FETCH_CONTACT",
+          type: "FETCH_CONTACT_SUCCESS",
           payload: ContactData,
         });
       })
@@ -110,7 +113,7 @@ export const fetchContactByID = (id) => {
         if (doc.exists) {
           console.log("Document data:", doc.data());
           dispatch({
-          type: "FETCH_CONTACT_BY_ID",
+          type: "FETCH_CONTACT_BY_ID_SUCCESS",
           payload:doc.data()
         });
           
@@ -148,7 +151,7 @@ export const updateContactByID = (id,
       .update({name:name,email:email,phonenumber:phonenumber})
       .then((doc) => {
         dispatch({
-          type: "UPDATE_CONTACT_BY_ID",
+          type: "UPDATE_CONTACT_BY_ID_SUCCESS",
          
           });
       })

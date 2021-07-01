@@ -88,7 +88,7 @@ class AddTask extends Component {
 const mapStateToProps = (state) => {
   console.log(state);
 
-  const AddingContactLoading = state.task.AddingContactLoading;
+  const AddingContactLoading = state.AddContact.AddingContactLoading;
   return {
     AddingContactLoading: AddingContactLoading,
   };

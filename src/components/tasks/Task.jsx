@@ -7,41 +7,38 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Task(props) {
   const [passedContact, setPassedContact] = useState(props.allcontacts);
-  const addedcontact = useSelector((state) => state.task);
-  const { newaddedcontact,ContactAddedSuccesssStatus } = addedcontact;
+  const addedcontact = useSelector((state) => state.AddContact);
+  const { newaddedcontact,ContactAddedSuccessStatus} = addedcontact;
+  const allstate = useSelector((state) => state);
 
-  const deletedcontact = useSelector((state) => state.task);
+  const deletedcontact = useSelector((state) => state.DeleteContact);
 
-  const { deletedContactId, ContactDeletedSuccesssStatus } = deletedcontact;
+  const { deletedContactId, ContactDeletedSuccessStatus } = deletedcontact;
 
 
   useEffect(() => {
     {
-      ContactAddedSuccesssStatus &&
-      setPassedContact([ newaddedcontact,...passedContact]);
+      ContactAddedSuccessStatus &&
       console.log("new contact added");
+      console.log("new doc",newaddedcontact);
+      setPassedContact([...passedContact,newaddedcontact]);
+      //      setAttachments([...userattachments, uploadedfile]);
+      console.log('all state:',allstate)
+      
     }
-    {
-      ContactDeletedSuccesssStatus &&
-      // setPassedContact([ newaddedcontact,...passedContact]);
-      console.log("a contact deleted");
-      console.log(passedContact)
+    // {
+    //   ContactDeletedSuccesssStatus &&
+    //   // setPassedContact([ newaddedcontact,...passedContact]);
+    //   console.log("a contact deleted");
+    //   console.log(passedContact)
      
-      const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
-      console.log(latestContact );
-      setPassedContact(latestContact);
-    }
-  }, [ContactAddedSuccesssStatus,ContactDeletedSuccesssStatus]);
+    //   const latestContact = passedContact.filter(contact => contact.id != deletedContactId);
+    //   console.log(latestContact );
+    //   setPassedContact(latestContact);
+    // }
+  }, []);
   return (
-  //   <Link to={`/listings/${space.id}/edit`}
-
-  //   className="action-item mr-2"
-
-  // >
-  //   <i
-
-  //     className="fa fa-edit"></i>
-  // </Link>
+ 
     <>
     {passedContact.map(contact => (
       <tr key={contact.id}>
