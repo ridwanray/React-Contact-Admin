@@ -33,7 +33,15 @@ function Task(props) {
     }
   }, [ContactAddedSuccesssStatus,ContactDeletedSuccesssStatus]);
   return (
+  //   <Link to={`/listings/${space.id}/edit`}
 
+  //   className="action-item mr-2"
+
+  // >
+  //   <i
+
+  //     className="fa fa-edit"></i>
+  // </Link>
     <>
     {passedContact.map(contact => (
       <tr key={contact.id}>
@@ -42,6 +50,7 @@ function Task(props) {
         <td scope="col">{contact.email}</td>
        
         <td scope="col">
+         
           <span
             className="material-icons text-danger"
             style={{ cursor: "pointer" }}
@@ -49,8 +58,10 @@ function Task(props) {
           >
             delete
           </span>
+        
         </td>
         <td scope="col">
+           <Link to={`/contact/${contact.id}/edit`}>
           <span
             className="material-icons text-danger"
             style={{ cursor: "pointer" }}
@@ -58,6 +69,7 @@ function Task(props) {
           >
             edit
           </span>
+          </Link>
         </td>
       </tr>
     ))}

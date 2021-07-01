@@ -1,9 +1,6 @@
 // import React from "react";
 import Task from "./Task";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchContact,deleteContact } from "../../actions/taskActions";
 
